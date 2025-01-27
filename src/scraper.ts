@@ -2,7 +2,6 @@ import puppeteer, { Page } from "puppeteer";
 import { generateText } from "ai";
 
 import { openai } from "@ai-sdk/openai";
-import { loading } from "cli-loading-animation";
 import { z } from "zod";
 
 export const scraper = async (url: string, prompt: string) => {
@@ -23,10 +22,6 @@ export const scraper = async (url: string, prompt: string) => {
   await exploreUrls(url, new Set(), page, content);
   const data = Object.fromEntries(content);
   const textData = JSON.stringify(data);
-  const { start: startGenerating, stop: stopGenerating } = loading(
-    "Generating response..."
-  );
-  startGenerating();
 
   const { text } = await generateText({
     model: openai("gpt-4o-mini"),
@@ -39,7 +34,6 @@ export const scraper = async (url: string, prompt: string) => {
     ${textData}
     </Details>`,
   });
-  stopGenerating();
 
   await browser.close();
   return text;
