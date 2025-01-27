@@ -1,0 +1,31 @@
+{
+  "name": "puppet",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run index.ts",
+    "dev": "serverless offline"
+  },
+  "devDependencies": {
+    "@serverless-bun/layer": "^1.0.1",
+    "@types/bun": "latest",
+    "@types/inquirer": "^9.0.7",
+    "cli-loading-animation": "^1.0.6",
+    "inquirer": "8",
+    "inquirer-checkbox-plus-prompt": "^1.4.2",
+    "inquirer-search-checkbox": "^1.0.0",
+    "inquirer-search-list": "^1.2.6",
+    "inquirer-tree-prompt": "^1.1.2",
+    "serverless-offline": "^14.4.0",
+    "serverless-plugin-typescript": "^2.1.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.1.2",
+    "ai": "^4.0.21",
+    "puppeteer": "^24.1.1",
+    "zod": "^3.24.1"
+  }
+}

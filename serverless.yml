@@ -1,0 +1,29 @@
+service: serverless
+custom:
+  bunLayer:
+    release: 1.0.25 # This is not required, however for most cases, you should specify a version here. Defaults to "latest" if unspecified.
+
+provider:
+  name: aws
+  region: af-south-1
+  architecture: arm64 # Set to "x86_64" if arch is set to "x64".
+  runtime: provided.al2 # Or "provided".
+
+  logs:
+    restApi: true
+
+functions:
+  scraper:
+    handler: src/api/scraper_handler.handler
+    environment:
+      OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    events:
+      - http:
+          path: api/scraper
+          method: post
+          request:
+            schemas:
+              application/json: ${file(src/schema/message_schema.json)}
+plugins:
+  - serverless-offline
+  - "@serverless-bun/layer"
