@@ -21,12 +21,6 @@ export const handler = async (event: any, context: any, done: Function) => {
       console.log("An unknown error occurred");
     }
     console.log(error);
-    done(null, {
-      statusCode: 500,
-      body: JSON.stringify({
-        error:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      }),
-    });
+    done(error, null);
   }
 };
