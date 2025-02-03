@@ -1,4 +1,4 @@
-import { explore} from "../scraper";
+import { explore } from "../scraper";
 
 export const handler = async (event: any, context: any, done: Function) => {
   try {

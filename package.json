@@ -27,9 +27,11 @@
     "@aws-sdk/client-sqs": "^3.738.0",
     "@aws-sdk/types": "^3.734.0",
     "@types/aws-lambda": "^8.10.147",
+    "@types/user-agents": "^1.0.4",
     "@upstash/redis": "^1.34.3",
     "ai": "^4.0.21",
     "puppeteer": "^24.1.1",
+    "user-agents": "^1.1.439",
     "zod": "^3.24.1"
   }
 }

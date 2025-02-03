@@ -7,6 +7,7 @@ import type { Callback, Context, S3Event, SQSEvent } from "aws-lambda";
 import { getCache, setCache } from "./entites/cache";
 import { getData, setData } from "./entites/database";
 import { push } from "./entites/queue";
+import UserAgent from "user-agents";
 
 const LinkMessageSchema = z.object({
   url: z.string().url(),
@@ -42,6 +43,7 @@ export async function explore(
 ) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  await page.setUserAgent(new UserAgent().toString());
 
   const urlSchema = z.string().url();
   if (!urlSchema.safeParse(url).success) {
@@ -51,7 +53,7 @@ export async function explore(
       return;
     }
   }
-  await exploreUrlsAndQueue(url, page, host,prompt, links);
+  await exploreUrlsAndQueue(url, page, host, prompt, links);
   browser.close();
 }
 
