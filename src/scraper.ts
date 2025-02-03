@@ -51,7 +51,7 @@ export async function explore(
       return;
     }
   }
-  await exploreUrlsAndQueue(url, page, host, links);
+  await exploreUrlsAndQueue(url, page, host,prompt, links);
   browser.close();
 }
 
@@ -76,6 +76,7 @@ async function exploreUrlsAndQueue(
   url: string,
   page: Page,
   host: string,
+  prompt: string,
   passedLinks?: string[]
 ) {
   const parsedURL = new URL(url);
