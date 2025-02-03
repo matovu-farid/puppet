@@ -1,9 +1,11 @@
-import { scraper } from "../scraper";
+import { explore} from "../scraper";
 
 export const handler = async (event: any, context: any, done: Function) => {
   try {
     const { url, prompt } = JSON.parse(event.body);
-    const result = await scraper(url, prompt);
+    const parsedURL = new URL(url);
+    const host = parsedURL.host.replace("www.", "");
+    const result = await explore(url, prompt, host);
 
     done(null, {
       statusCode: 200,

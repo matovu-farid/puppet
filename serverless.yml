@@ -9,6 +9,14 @@ provider:
     restApi: true
 
 functions:
+functions:
+  resize:
+    handler: src/scraper.scrappedDataAdded
+    events:
+      - s3:
+          bucket: scrappy-scrapped
+          event: s3:ObjectCreated:*
+          existing: true
   scraper:
     handler: src/api/scraper_handler.handler
     environment:
@@ -21,7 +29,7 @@ functions:
             schemas:
               application/json: ${file(src/schema/message_schema.json)}
   expolerUrl:
-    handler: src/api/scraper.exploreUrl
+    handler: src/scraper.exploreUrl
     events:
       - sqs:
           arn: arn:aws:sqs:af-south-1:227299563662:scrappy
