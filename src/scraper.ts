@@ -8,7 +8,7 @@ import { getCache, setCache } from "./entites/cache";
 import { getData, setData } from "./entites/database";
 import { push } from "./entites/queue";
 import UserAgent from "user-agents";
-
+import chromium from "@sparticuz/chromium";
 const LinkMessageSchema = z.object({
   url: z.string().url(),
   prompt: z.string(),
@@ -41,7 +41,12 @@ export async function explore(
   host: string,
   links?: string[]
 ) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath(),
+    headless: "shell",
+  });
   const page = await browser.newPage();
   await page.setUserAgent(new UserAgent().toString());
 
