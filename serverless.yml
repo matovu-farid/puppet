@@ -9,8 +9,7 @@ provider:
     restApi: true
 
 functions:
-functions:
-  resize:
+  scrapedDataAdded:
     handler: src/scraper.scrappedDataAdded
     events:
       - s3:
