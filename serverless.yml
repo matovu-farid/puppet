@@ -1,13 +1,9 @@
 service: serverless
-custom:
-  bunLayer:
-    release: 1.0.25 # This is not required, however for most cases, you should specify a version here. Defaults to "latest" if unspecified.
 
 provider:
   name: aws
-  region: af-south-1
-  architecture: arm64 # Set to "x86_64" if arch is set to "x64".
-  runtime: provided.al2 # Or "provided".
+  # region: af-south-1
+  runtime: nodejs22.x
 
   logs:
     restApi: true
@@ -24,6 +20,11 @@ functions:
           request:
             schemas:
               application/json: ${file(src/schema/message_schema.json)}
+  expolerUrl:
+    handler: src/api/scraper.exploreUrl
+    events:
+      - sqs:
+          arn: arn:aws:sqs:af-south-1:227299563662:scrappy
+
 plugins:
   - serverless-offline
-  - "@serverless-bun/layer"

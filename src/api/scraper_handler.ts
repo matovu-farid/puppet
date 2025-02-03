@@ -9,6 +9,8 @@ export const handler = async (event: any, context: any, done: Function) => {
       statusCode: 200,
       body: JSON.stringify({
         result,
+        url,
+        prompt,
       }),
       headers: {
         "Content-Type": "application/json",
