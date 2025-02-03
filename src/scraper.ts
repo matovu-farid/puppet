@@ -7,7 +7,7 @@ import type { Callback, Context, S3Event, SQSEvent } from "aws-lambda";
 import { getCache, setCache } from "./entites/cache";
 import { getData, setData } from "./entites/database";
 import { push } from "./entites/queue";
-import UserAgent from "user-agents";
+// import UserAgent from "user-agents";
 import chromium from "@sparticuz/chromium";
 const LinkMessageSchema = z.object({
   url: z.string().url(),
@@ -42,13 +42,10 @@ export async function explore(
   links?: string[]
 ) {
   const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
     headless: "shell",
   });
   const page = await browser.newPage();
-  await page.setUserAgent(new UserAgent().toString());
+  // await page.setUserAgent(new UserAgent().toString());
 
   const urlSchema = z.string().url();
   if (!urlSchema.safeParse(url).success) {
